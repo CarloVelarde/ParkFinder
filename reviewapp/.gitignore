@@ -9,3 +9,6 @@ __pycache__/
 
 # Ignores venv and everything in it
 venv/
+
+# Ignores local testing file
+testing.py
