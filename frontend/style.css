@@ -53,7 +53,7 @@
 
 .search-background{
    background:url(imgs/national-park-4.jpg) no-repeat center center/cover;
-   height:75vh;
+   height:50vh;
 }
 
 .search-parks h1{
@@ -73,7 +73,5 @@
 }
 
 .merge-shade{
-   
-   min-height:25vh;
-
+   min-height:50vh;
 }
