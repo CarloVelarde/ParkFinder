@@ -19,7 +19,7 @@ async def startup():
 
 
 # The index file becomes the root document
-@app.get("/")
+@app.get("/", tags = ["Root"])
 async def read_index():
    return FileResponse("../frontend/index.html")
 

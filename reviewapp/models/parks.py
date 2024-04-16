@@ -1,16 +1,23 @@
 from beanie import Document
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 class Parks(Document):
    park_name: str
+   park_code: str
    state: str
-   address: str
-   images: List[str]
-   fees_passes: Optional[str] = None
-   campgrounds: List[str]
-   amenities: List[str]
-   alerts: List[str]
+   state_code: str
+   description: str
    activities: List[str]
+   topics: List[str]
+   contacts: Dict[list]
+   fees: List[str]   # probably will just do entrance fees
+   operating_hours: List[dict]
+   address: List[dict]
+   images: List[str]
+   weather: str
+
+
+   
 
    # class Config: 
    #    json_schema_extra = {
