@@ -1,6 +1,9 @@
 import os
-from fastapi import APIRouter, HTTPException, status 
+from typing import Dict, List
+from bson import ObjectId
+from fastapi import APIRouter, HTTPException, Path, Query, status 
 import httpx
+import re
 
 from models.parks import Parks
 
@@ -9,7 +12,7 @@ park_routes_router = APIRouter(tags=["Database Queries"])
 
 
 @park_routes_router.post("/parks/refresh-parks", status_code = status.HTTP_200_OK)
-async def refresh_parks_data():
+async def refresh_parks_data() -> Dict[str, str]:
 
    API_URL = "https://developer.nps.gov/api/v1/parks"
    params = {
@@ -93,4 +96,49 @@ async def refresh_parks_data():
         await new_park.insert()
       
       return {"Success": "updated all parks in database"}
+   
+
+@park_routes_router.get("/parks/{id}", response_description= "Get a park by ID.",) 
+async def get_park_by_id(id: str = Path(..., description="id of the park you want to retrieve.")) -> Parks:
+   """
+   Get a park by ID.
+   """
+   object_id = ObjectId(id)
+   park = await Parks.find_one(Parks.id == object_id)
+   if park:
+      return park
+   else:
+      raise HTTPException(status_code = 404, detail = f"Park {id} not found.")
+   
+
+
+@park_routes_router.get("/parks/by-state/{state_code}", response_description= "Find parks by state code.")
+async def find_parks_by_state(state_code: str = Path(..., description= "Code that represents specified state.")) -> List[Parks]:
+   """
+   Retrieve all parks located in the specified state code.
+   """
+   parks = await Parks.find_many(Parks.state_code == state_code.upper()).to_list()
+
+   for park in parks:
+      print(park.park_name)
+   if parks:
+      return parks
+   else:
+      raise HTTPException(status_code = 404, detail = f"No parks with specified ID")
+   
+
+@park_routes_router.get("/parks/by-name/{park_name}")
+async def find_parks_by_name(park_name : str = Path(..., description= "Name of the park you are searching for")):
+   """
+   Retrieve park(s) by name. Finds any parks where its name
+   contains the given park_name parameter anywhere within it. Case-insensitive.
+   """
+   park_name = park_name.title()
+   regex_pattern = re.compile(f".*{re.escape(park_name)}.*", re.IGNORECASE)
+   parks = await Parks.find({"park_name": regex_pattern}).to_list()
+
+   # Returns a list whether it finds something or not.
+   return parks
+
+
 
