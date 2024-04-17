@@ -107,9 +107,13 @@ async function searchParksByInput(state_id, state_name){
       parks_by_states = await fetchParksByState(state_id)
    }
 
-
-   if (parks_by_names.length === 0){
+   if (state_id && !(state_name)){
       return parks_by_states
+   }
+
+   // if there was a search and nothing showed up, return nothing
+   else if (parks_by_names.length === 0 && parks_by_states.length > 1){
+      return []
    }
 
    else if (parks_by_states.length === 0){
