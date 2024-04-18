@@ -119,8 +119,6 @@ async def find_parks_by_state(state_code: str = Path(..., description= "Code tha
    """
    parks = await Parks.find_many(Parks.state_code == state_code.upper()).to_list()
 
-   for park in parks:
-      print(park.park_name)
    if parks:
       return parks
    else:
