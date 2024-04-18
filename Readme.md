@@ -6,6 +6,8 @@ Class: CS: 3980
 
 Group: Hawkeye Developers
 
+## Setup
+
 ## Front-end
 
 ## Back-end
