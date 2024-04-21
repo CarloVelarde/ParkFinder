@@ -72,7 +72,7 @@ function buildSearchArea(parks){
 
       park_results_row.innerHTML += `
       <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-sm-center park-card" data-park-id="${park_id}">
-         <div class="card" style="width: 18rem;">
+         <div class="card park-search-card" style="width: 18rem;">
             <img src="${park_image}" class="card-img-top" alt="picture of ${park_name}" style = "width:100%;height:200px;object-fit:cover;">
             <div class="card-body">
                <h5 class="text-center">${park_name}</h5>
@@ -211,7 +211,7 @@ async function displayParkData(){
          <div class = "d-sm-flex align-items-center justify-content-between" id="park-heading-container">
             <div class = "p-5">
                <h1>${park.park_name}</h1>
-               <p>Topics: ${topics}</p>
+               <p><strong>Topics</strong>: ${topics}</p>
                
             </div>
             <img class = "img-fluid w-50 d-none d-sm-block p-5" src="${getRandomImageAndRemove(park_images)}" alt="">

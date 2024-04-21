@@ -79,3 +79,10 @@
 .merge-shade{
    min-height:50vh;
 }
+
+
+.park-search-card:hover{
+   opacity:.8;
+   cursor:pointer;
+   border:solid 5px white;
+}
