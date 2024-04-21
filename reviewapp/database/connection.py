@@ -4,6 +4,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 from models.reviews import Reviews
 from models.parks import Parks
+from models.parkimage import ParkImages
 
 
 async def init_db():
@@ -14,4 +15,4 @@ async def init_db():
    conn_str = os.getenv("DB_CONN")
    client = AsyncIOMotorClient(conn_str)
 
-   await init_beanie(database = client.park_app, document_models=[Reviews, Parks])
+   await init_beanie(database = client.park_app, document_models=[Reviews, Parks, ParkImages])

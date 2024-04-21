@@ -7,6 +7,7 @@ from database.connection import init_db
 
 from routes.parkreview import park_reviews_router
 from routes.parkroutes import park_routes_router
+from routes.parkimageroute import park_images_router
 
 app = FastAPI(
    title = "API for Park Finder Application",
@@ -27,6 +28,7 @@ async def read_index():
 app.add_event_handler("startup", startup)
 app.include_router(park_reviews_router)
 app.include_router(park_routes_router)
+app.include_router(park_images_router)
 
 
 app.mount("/", StaticFiles(directory = "../frontend"), name = "static")
