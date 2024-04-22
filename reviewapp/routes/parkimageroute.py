@@ -56,7 +56,7 @@ async def get_images(park_name: str):
    for image in image_record:
       image_id = str(image.id)
       image_data = {
-         "id": image_id,
+         "image_id": image_id,
          "url": f"/images/{image_id}"
       }
       images_data.append(image_data)

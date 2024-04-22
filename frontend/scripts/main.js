@@ -115,13 +115,19 @@ async function uploadFile(user, parkName, fileInput) {
            }
 
            const result = await response.json();
+           alert('Success: ' + result.message)
+
+           return true;
             
        } catch (error) {
            console.error('Error:', error);
            alert('Error: ' + error.message);
+           return false
+           
        }
    } else {
-       alert('Please select a file to upload.');
+      alert('Please select a file to upload.')
+      return false;
    }
 }
 
@@ -456,23 +462,23 @@ async function displayParkData(){
    </section> 
    
    `
-
    // This is for the uploading images
    // Change users on here when able.
-   let imageSubmitInput = document.getElementById("imageSubmitInput");
-   let imageUploadButton = document.getElementById("uploadImageButton");
-   let imageModal = document.getElementById('imageModal')
-   
-   
-   
+   document.getElementById('uploadImageButton').addEventListener('click', async function() {
+      const fileInput = document.getElementById("imageSubmitInput");
+      const user = "Gabe";  // Example user, should be dynamically set
+      const parkName = "Example Park";  // Example park name, should be dynamically set
+  
+      const success = await uploadFile(user, parkName, fileInput);
+      if (success) {
+          // Only close the modal if the upload was successful
 
-   imageUploadButton.addEventListener('click', async function(){
-      await uploadFile("Gabe", park.park_name, imageSubmitInput);
-      imageSubmitInput.value = "";
-      imageUploadButton.setAttribute('data-bs-dismiss', 'modal')
-   
-
-   })
+          fileInput.value = ""
+          const modalElement = document.getElementById('imageModal');
+          const modalInstance = bootstrap.Modal.getInstance(modalElement);
+          modalInstance.hide();
+      }
+  });
 
 
 }
