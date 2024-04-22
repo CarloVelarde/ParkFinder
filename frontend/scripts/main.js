@@ -60,6 +60,72 @@ async function fetchParksByName(park_name){
    }
 }
 
+async function fetchUserImagesByName(park_name){
+   try {
+      const response = await fetch(API + `images/by-park/${park_name}`)
+      if (!response){
+         throw new Error ("Could not fetch resource")
+      }
+
+      const data = await response.json()
+      return data
+   }
+
+   catch(error){
+      console.error(error)
+      return []
+   }
+}
+
+async function fetchUserImagesById(id){
+   try {
+      const response = await fetch(API + `images/${id}`)
+      if (!response){
+         throw new Error ("Could not fetch resource")
+      }
+
+      const data = response.blob()
+      return data
+   }
+   
+   catch (error){
+      console.error(error)
+   }
+}
+
+async function uploadFile(user, parkName, fileInput) {
+   if (fileInput.files.length > 0) {
+       const file = fileInput.files[0];
+
+       const formData = new FormData();
+       formData.append('file', file);
+
+       const url = new URL(API + 'upload-image/');
+       url.searchParams.append('user', user);
+       url.searchParams.append('park_name', parkName);
+
+       try {
+           const response = await fetch(url, {  // Using constructed URL with query params
+               method: 'POST',
+               body: formData,
+           });
+
+           if (!response.ok) {
+               throw new Error('Failed to upload image: ' + await response.text());
+           }
+
+           const result = await response.json();
+           alert('Success: ' + result.message);
+            
+       } catch (error) {
+           console.error('Error:', error);
+           alert('Error: ' + error.message);
+       }
+   } else {
+       alert('Please select a file to upload.');
+   }
+}
+
 // Build park page
 function buildSearchArea(parks){
    park_results_row.innerHTML = "";
@@ -177,7 +243,7 @@ function initializeParksPage(){
 }
 
 
-// Gets image and if there doesnt exist, then return none.
+// Given a list of picture urls, it gets image and if none exist, then return none.
 // If there is an image, it returns it and then removes from array.
 function getRandomImageAndRemove(pictures) {
    if (pictures.length === 0) {
@@ -193,10 +259,50 @@ function buildAddress(park){
    return new_addy
 }
 
+// Helper method that builds the image slider given an array of image links
+function buildSlider(userImages) {
+   let section = ``;
+   userImages.forEach((image, index) => {
+       section += `
+       <div class="carousel-item ${index === 0 ? 'active' : ''}">
+           <img src="${image}" class="d-block w-100" alt="User uploaded image">
+       </div>
+       `;
+   });
+   return section;
+}
+
+
+// Given park name, it will return a list of all user uploaded images (as urls) by given park
+async function getUserImages(park_name){
+
+   let imageArray = []
+   let imageData = await fetchUserImagesByName(park_name)
+   
+   if (imageData && imageData.length > 0){
+      for (let image of imageData) {
+         const imgBlob = await fetchUserImagesById(image.image_id);  // Fetch the image blob using the image ID
+         if (imgBlob) {
+             const imgURL = URL.createObjectURL(imgBlob);  // Create a local URL to be used in an <img> element
+             imageArray.push(imgURL);
+         }
+     }
+   }
+   return imageArray
+}
+
+
 async function displayParkData(){
    const parkId = localStorage.getItem('selectedParkId');
    
+   
+
    let park = await fetchParkByID(parkId);
+   
+   let userImages = await getUserImages(park.park_name);
+   let section = buildSlider(userImages)
+   
+
    let park_images = park.images;
    const topics = park.topics.slice(0,7).join(", ");
    const address = buildAddress(park);
@@ -295,44 +401,79 @@ async function displayParkData(){
       </div>
    </section>
 
-   <!-- Activites -->
-   <!-- Boxes -->
-   <section class="p-5">
+   <!--Image Upload Section -->
+   
+   <section class = "p-5" id = "learn">
       <div class="container">
-         <h2 class = "text-center">Activities</h2>
-         <hr>
-         <div class="row text-center g-4">
-            <div class="col-md">
-               <div class="card bg-dark text-light">
-                  <div class="card-body text-center">
-                     <h3 class="card-title mb-2">
-                        ${park.activities[0]}
-                     </h3>
+         <div class="row align-items-center justify-content-between">
+            <div class="col-md p-5">
+               <h2>Visitor Uploaded Images</h2>
+               <p class = "lead">Here are some images of the park that have been uploaded by other visitors. These photos give real feeling to the park.</p>
+               <p>We encourage all users to upload their photos of the park. It allows you to share your personal expierence while also giving others an inside look into the park.</p>
+               <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#imageModal">
+                  Upload Image
+                </button>
+
+
+                <div class="modal fade" id="imageModal" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="imageModalLabel">Upload Image</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="file" id = "imageSubmitInput" accept = "image/*">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id = "uploadImageButton"class="btn btn-dark">Upload</button>
+                      </div>
+                    </div>
                   </div>
-               </div>
+                </div>
+
             </div>
+
             <div class="col-md">
-               <div class="card bg-secondary text-light">
-                  <div class="card-body text-center">
-                     <h3 class="card-title mb-2">
-                        ${park.activities[1]}
-                     </h3>
+               <div id="carouselExample" class="carousel slide">
+                  <div class="carousel-inner">
+                    ${section}
                   </div>
-               </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
             </div>
-            <div class="col-md">
-               <div class="card bg-dark text-light">
-                  <div class="card-body text-center">
-                     <h3 class="card-title mb-2">
-                        ${park.activities[2]}
-                     </h3>
-                  </div>
-               </div>
-            </div>
+            
          </div>
       </div>
-   </section>
+   </section> 
+   
    `
+
+   // This is for the uploading images
+   // Change users on here when able.
+   let imageSubmitInput = document.getElementById("imageSubmitInput");
+   let imageUploadButton = document.getElementById("uploadImageButton");
+   let imageModal = document.getElementById('imageModal')
+   
+   
+   
+
+   imageUploadButton.addEventListener('click', async function(){
+      await uploadFile("Gabe", park.park_name, imageSubmitInput);
+      imageSubmitInput.value = "";
+      
+      
+
+   })
 
 
 }
