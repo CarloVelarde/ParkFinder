@@ -115,7 +115,6 @@ async function uploadFile(user, parkName, fileInput) {
            }
 
            const result = await response.json();
-           alert('Success: ' + result.message);
             
        } catch (error) {
            console.error('Error:', error);
@@ -470,8 +469,8 @@ async function displayParkData(){
    imageUploadButton.addEventListener('click', async function(){
       await uploadFile("Gabe", park.park_name, imageSubmitInput);
       imageSubmitInput.value = "";
-      
-      
+      imageUploadButton.setAttribute('data-bs-dismiss', 'modal')
+   
 
    })
 
