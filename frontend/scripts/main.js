@@ -467,7 +467,7 @@ async function displayParkData(){
    document.getElementById('uploadImageButton').addEventListener('click', async function() {
       const fileInput = document.getElementById("imageSubmitInput");
       const user = "Gabe";  // Example user, should be dynamically set
-      const parkName = "Example Park";  // Example park name, should be dynamically set
+      const parkName = park.park_name;
   
       const success = await uploadFile(user, parkName, fileInput);
       if (success) {
