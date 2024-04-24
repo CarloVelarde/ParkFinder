@@ -8,6 +8,8 @@ Group: Hawkeye Developers
 
 ## Setup
 
+Just run program to get it to 
+
 ## Front-end
 
 ## Back-end
