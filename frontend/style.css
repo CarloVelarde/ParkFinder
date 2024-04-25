@@ -88,3 +88,36 @@
    cursor:pointer;
    border:solid 5px white;
 }
+
+
+/* Reviews */
+
+#heading-review-section{
+   background:url(./assets/imgs/national-park-5.jpg) no-repeat center center/cover;
+   height: 40vh;
+   text-align:center;
+}
+
+#heading-review-section h1{
+   padding-top:10rem;
+   padding-bottom:.3rem;
+   font-size:4rem;
+   display:inline-block;
+   border-bottom:white solid 1px;
+}
+
+#heading-review-section p {
+   font-size:1.3rem;
+}
+
+
+.review-section h3{
+   display:inline-block;
+   font-size:3rem;
+}
+
+
+.review-description-container p{
+   padding-right: 1rem;
+}
+
