@@ -9,6 +9,9 @@ let page_number = document.getElementById("page-number")
 let heading_background = document.getElementById("heading-review-section")
 
 
+let post_modal = document.getElementById("postModal")
+let postReviewButton = document.getElementById("postReviewButton")
+
 // Returns a park given the id
 async function fetchParkByID(id){
    try {
@@ -22,6 +25,33 @@ async function fetchParkByID(id){
    }
    catch(error) {
       console.error(error)
+   }
+}
+
+
+// Post reviews to database
+async function postReview(user, park_name, content, rating){
+   try {
+      const data = {
+         user: user,
+         park_name: park_name,
+         content: content,
+         rating: rating
+      };
+
+      const response = await fetch(API + "reviews/post/",{
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(data),
+      });
+
+      const result = await response.json()
+      console.log("Success: ", result)
+   }
+   catch(error){
+      console.error("Error:", error);
    }
 }
 
@@ -83,7 +113,7 @@ async function display_reviews(park){
          </div>
       `
    })
-   console.log("OK")
+   
 
 }
 
@@ -100,6 +130,34 @@ document.addEventListener('DOMContentLoaded', async function(){
       let park = await fetchParkByID(park_id)
 
       display_page(park)
-      console.log("WORKING")
+
+      postReviewButton.addEventListener('click', async () =>{
+         let rating = parseInt(document.getElementById("updateRating").value);
+         let description = document.getElementById("postDescription").value;
+         let rev_error = document.getElementById("review-error");
+
+         if ((description.length >=5) && (rating>=1 && rating <=5)){
+            await postReview("Temp", park.park_name, description, rating)
+
+            // Clears modal input when post is successful
+            document.getElementById("updateRating").value = ""
+            document.getElementById("postDescription").value =""
+
+            // Closes modal when post is successful
+            const modalElement = document.getElementById('postModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            modalInstance.hide();
+            rev_error.style.display = "none"
+
+            // Refresh reviews
+            display_reviews(park)
+         }
+         else{
+            
+            rev_error.style.display = "block"
+            
+         }
+      })
+
    }
 })

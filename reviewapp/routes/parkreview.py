@@ -47,7 +47,7 @@ async def get_reviews_by_park(park: str):
    """
    Get reviews under a specific park.
    """
-   reviews = await Reviews.find(Reviews.park_name == park.capitalize()).to_list()
+   reviews = await Reviews.find(Reviews.park_name == park).to_list()
    return reviews
 
 
@@ -102,7 +102,11 @@ async def update_review(id: str, updateReview: UpdateReviews):
    if review:
       if updateReview.content:
          review.content = updateReview.content
-         await review.save()
-         return review
-      else:
-         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = f"Review {id} not found")
+
+      if updateReview.rating:
+         review.rating = updateReview.rating
+      
+      await review.save()
+      return review
+   else:
+      raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = f"Review {id} not found")
