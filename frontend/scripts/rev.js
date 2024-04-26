@@ -11,6 +11,10 @@ let heading_background = document.getElementById("heading-review-section")
 
 let post_modal = document.getElementById("postModal")
 let postReviewButton = document.getElementById("postReviewButton")
+let deleteReviewButton = document.getElementById("deleteReviewButton")
+
+let edit_modal = document.getElementById("editModal")
+let editReviewButton = document.getElementById("editReviewButton")
 
 // Returns a park given the id
 async function fetchParkByID(id){
@@ -25,6 +29,30 @@ async function fetchParkByID(id){
    }
    catch(error) {
       console.error(error)
+   }
+}
+
+// Edit reviews in database fetch
+async function editReview(review_id, content, rating){
+   try {
+      const data = {
+         content:content,
+         rating: rating
+      };
+
+      const response = await fetch(API + `reviews/update/${review_id}`,{
+         method: "PUT",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      
+   }
+   catch (error){
+      console.error("Error:", error)
    }
 }
 
@@ -56,6 +84,26 @@ async function postReview(user, park_name, content, rating){
 }
 
 
+// Delete review
+async function deleteReview(id){
+   try {
+      const response = await fetch(API + `reviews/delete/${id}`,{
+         method:"DELETE",
+      });
+
+      if (!response){
+         throw new Erorr ("Could not fetch delete")
+      }
+
+      const result = await response.json()
+      console.log("Success: ", result)
+   }
+
+   catch(error){
+      console.error("Error:", error);
+   }
+}
+
 // Fetch and return a list of reviews given the park name
 async function fetchReviewsByPark(park_name){
    try {
@@ -68,6 +116,23 @@ async function fetchReviewsByPark(park_name){
       return data 
    }
    catch(error) {
+      console.error(error)
+   }
+}
+
+// Fetch and return a review given its id
+async function fetchReviewByID(id){
+   try {
+      const response = await fetch(API + `reviews/${id}`)
+      if (!response){
+         throw new Error("Could not fetch resource")
+      }
+
+      const data = await response.json()
+      return data
+   }
+
+   catch(error){
       console.error(error)
    }
 }
@@ -107,14 +172,79 @@ async function display_reviews(park){
                <p><strong><i class="fa-regular fa-comment"></i> Description: </strong>${review.content} </p>
                
             </div>
-            <button class="btn btn-outline-secondary" data-user = "${review.user}" data-review-id = "${review._id}">Edit</button>
-            <button class="btn btn-danger" data-user = "${review.user}" data-review-id = "${review._id}">Delete</button>
+            <button class="btn btn-outline-secondary edit-button" data-user = "${review.user}" data-review-id = "${review._id}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+            <button class="btn btn-danger delete-button" id = "deleteReviewButton" data-user = "${review.user}" data-review-id = "${review._id}">Delete</button>
             <hr>
          </div>
       `
    })
-   
 
+   await setUpEditButtons(park)
+   await setUpDeleteButtons(park)
+}
+
+async function setUpDeleteButtons(park){
+   
+   const deleteBtns = document.querySelectorAll('.delete-button');
+   deleteBtns.forEach(btn => {
+      btn.addEventListener('click', async function (){
+         const reviewID= btn.getAttribute('data-review-id');
+         
+         await deleteReview(reviewID);
+         display_reviews(park)
+         
+      });
+   });
+   
+}
+
+async function setUpEditButtons(park){
+   const editBtns = document.querySelectorAll('.edit-button');
+   editBtns.forEach(btn => {
+      btn.addEventListener('click', async function() {
+
+         let reviewID= btn.getAttribute('data-review-id');
+         
+         
+         let review_data = await fetchReviewByID(reviewID);
+         let desc_input = document.getElementById("editDescription");
+         let rating_input = document.getElementById("editRating");
+
+         // Sets the modal with the data of the original review.
+         
+         rating_input.value = review_data.rating;
+         desc_input.value = review_data.content;
+         
+         
+         localStorage.setItem("edit_id", reviewID)
+      })
+
+   })
+
+   
+   // When the final edit button is clicked, the put endpoint is called.
+   editReviewButton.addEventListener('click', async () =>{
+      let editDescription = document.getElementById("editDescription").value;
+      let editRating = parseInt(document.getElementById("editRating").value);
+      let reviewID = localStorage.getItem("edit_id") // id of the review to edit
+      
+      await editReview(reviewID, editDescription, editRating)
+      
+      // Set back to default
+      localStorage.removeItem("edit_id");
+      
+
+      // Closes modal when post is successful
+      const modalElement = document.getElementById('editModal');
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      modalInstance.hide();
+      
+      
+
+      // Refresh reviews
+      display_reviews(park)
+      
+   })
 }
 
 
@@ -129,18 +259,22 @@ document.addEventListener('DOMContentLoaded', async function(){
    
       let park = await fetchParkByID(park_id)
 
-      display_page(park)
+      await display_page(park)
 
+
+      // All activity for when post button is clicked
       postReviewButton.addEventListener('click', async () =>{
-         let rating = parseInt(document.getElementById("updateRating").value);
+         
+         let rating = parseInt(document.getElementById("postRating").value);
          let description = document.getElementById("postDescription").value;
          let rev_error = document.getElementById("review-error");
 
+         
          if ((description.length >=5) && (rating>=1 && rating <=5)){
             await postReview("Temp", park.park_name, description, rating)
 
             // Clears modal input when post is successful
-            document.getElementById("updateRating").value = ""
+            document.getElementById("postRating").value = ""
             document.getElementById("postDescription").value =""
 
             // Closes modal when post is successful
@@ -157,7 +291,15 @@ document.addEventListener('DOMContentLoaded', async function(){
             rev_error.style.display = "block"
             
          }
-      })
+      });
+
+      // Delete button event listner setup
+      await setUpDeleteButtons(park)
+
+      
+
 
    }
 })
+
+

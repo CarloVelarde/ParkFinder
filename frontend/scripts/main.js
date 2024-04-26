@@ -252,7 +252,7 @@ function initializeParksPage(){
 // If there is an image, it returns it and then removes from array.
 function getRandomImageAndRemove(pictures) {
    if (pictures.length === 0) {
-       throw new Error("No pictures available");
+       return ""
    }
    const index = Math.floor(Math.random() * pictures.length);
    return pictures.splice(index, 1)[0]; // Removes the image from the array and returns it
