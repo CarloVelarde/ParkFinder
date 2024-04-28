@@ -14,7 +14,7 @@ class Reviews(Document):
    class Config: 
       json_schema_extra = {
          "example": {
-            "user": "carlo-velarde@uiowa.com",
+            "user": "124UBLUbbrfBreagb31243B32rbBhh4",
             "park_name": "Carlsbad",
             "content": "I loved it here. I recommend coming in the Summer when it is less windy and warm.",
             "upvotes": 0
