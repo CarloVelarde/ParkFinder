@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict
 
 
 class Reviews(Document):
-   user: str
+   user: Optional[str] = None
    park_name: str
    content: str
    rating: int
@@ -15,7 +15,7 @@ class Reviews(Document):
    class Config: 
       json_schema_extra = {
          "example": {
-            "user": "124UBLUbbrfBreagb31243B32rbBhh4",
+            "user": "example@gmmail.com",
             "park_name": "Carlsbad",
             "content": "I loved it here. I recommend coming in the Summer when it is less windy and warm.",
             "rating": 5,
