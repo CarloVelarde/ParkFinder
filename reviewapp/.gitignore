@@ -12,3 +12,5 @@ venv/
 
 # Ignores local testing file
 testing.py
+
+logs/*
