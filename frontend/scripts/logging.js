@@ -11,7 +11,9 @@ let signInPassword = document.getElementById("signInPassword");
 
 let success_fail_messageIN = document.getElementById("success_fail_messageIN")
 let success_fail_messageUP = document.getElementById("success_fail_messageUP")
+let success_fail_messageOUT = document.getElementById("success_fail_messageOUT")
 
+let signout_button = document.getElementById("signout_button")
 
 
 signUpForm.addEventListener('submit', function(event) {
@@ -119,3 +121,16 @@ signInForm.addEventListener('submit', function(event) {
        success_fail_messageIN.style.display = "inline";
    });
 });
+
+
+
+// Signout
+
+signout_button.addEventListener('click', function(event) {
+   event.preventDefault();
+   localStorage.clear();
+   success_fail_messageOUT.textContent = "Successfully logged out.";
+   success_fail_messageOUT.style.color = "green";
+   success_fail_messageOUT.style.display = "inline";
+
+})
