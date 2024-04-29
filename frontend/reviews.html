@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Reviews</title>
+
+   <script src="https://kit.fontawesome.com/7e084fc130.js" crossorigin="anonymous"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div class="container-fluid">
+         <a class="navbar-brand" href="#"><i class="fa-solid fa-person-hiking"></i> Park Finder</a>
+
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item px-2-lg">
+               <a class="nav-link" href="./index.html">Home</a>
+            </li>
+            <li class="nav-item px-2-lg">
+               <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <li class="nav-item px-2-lg">
+               <a class="nav-link" href="./parks.html">Parks</a>
+            </li>
+            <li class="nav-item px-2-lg">
+               <a class="nav-link" href="./login.html" id = "signin-link"><i class="fa-solid fa-user"></i></a>
+            </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+
+
+   <!-- Heading -->
+   <section id = "heading-review-section">
+      <div class="container">
+         <h1 class = "text-white" id = "page-title">Alagnak Wild River</h1>
+         <p class = "text-white"> Write and Read Reviews</p>
+      </div>
+   </section>
+
+   <!-- Extra Data and Write Review Button -->
+   <section>
+      <div class="container">
+         <div class="row mt-5 mb-5 justify-content-end">
+            <div class="col-md border border-dark-subtle rounded">
+               <p id = "page-address" class = "pt-2">Address</p>
+            </div>
+            <div class="col-md-2 border border-dark-subtle rounded ms-md-3 ">
+               <p id = "page-number" class = "pt-2"> Number</p>
+            </div>
+            <div class="mb-2 mb-md-0 col-md-2">
+               <button type = "button" class = "btn btn-outline-warning btn-lg" data-bs-toggle="modal" data-bs-target="#postModal">Write a Review</button>
+            </div>
+         </div>
+         <hr>
+      </div>
+   </section>
+
+   <!-- Reviews -->
+   <section class="review-section">
+      <div class="container">
+         <h3 class = "mb-2 mt-4">
+            Reviews 
+         </h3>
+         <hr>
+         <div id="review-container">
+            
+         </div>
+         
+         
+      </div>
+   </section>
+
+
+   <!-- Modal for posting -->
+   <section>
+      <div class="modal fade" id="postModal" tabindex="-1">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h1 class="modal-title fs-5" id="postModalLabel">Write Review</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+             </div>
+             <div class="modal-body">
+               <form id="postForm">
+                  
+                  <label for="postRating">Rating out of 5</label>
+                  <input id = "postRating" type="number" min="1" max="5" class = "form-control">
+   
+                  <label for="postDescription" class="mt-3">Description</label>
+                  <textarea
+                     id="postDescription"
+                     name=""
+                     class="form-control"
+                     cols="30"
+                     rows="5"
+                  ></textarea>
+                  <p id = "review-error" class = "text-danger" style = "display:none">Please enter a valid input.</p>
+               </form>
+               
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-outline-warning" id ="postReviewButton">Upload Review</button>
+             </div>
+           </div>
+         </div>
+       </div>
+   </section>
+
+
+   <!-- Modal for editing -->
+   <section>
+      <div class="modal fade" id="editModal" tabindex="-1">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h1 class="modal-title fs-5" id="editModalLabel">Edit Review</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+             </div>
+             <div class="modal-body">
+               <form id="editForm">
+                  
+                  <label for="editRating">Rating out of 5</label>
+                  <input id = "editRating" type="number" min="1" max="5" class = "form-control">
+   
+                  <label for="editDescription" class="mt-3">Description</label>
+                  <textarea
+                     id="editDescription"
+                     name=""
+                     class="form-control"
+                     cols="30"
+                     rows="5"
+                  ></textarea>
+                  <p id = "review-error" class = "text-danger" style = "display:none">Please enter a valid input.</p>
+               </form>
+               
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-outline-warning" id ="editReviewButton">Edit Review</button>
+             </div>
+           </div>
+         </div>
+       </div>
+   </section>
+
+
+   
+   
+
+
+   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <script src = "./scripts/rev.js"></script>
+</body>
+</html>

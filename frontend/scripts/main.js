@@ -93,21 +93,25 @@ async function fetchUserImagesById(id){
    }
 }
 
-async function uploadFile(user, parkName, fileInput) {
+async function uploadFile(parkName, fileInput) {
    if (fileInput.files.length > 0) {
        const file = fileInput.files[0];
 
        const formData = new FormData();
        formData.append('file', file);
 
+      
        const url = new URL(API + 'upload-image/');
-       url.searchParams.append('user', user);
+       
        url.searchParams.append('park_name', parkName);
 
        try {
            const response = await fetch(url, {  // Using constructed URL with query params
-               method: 'POST',
-               body: formData,
+            method: 'POST',
+            headers: {
+               'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body: formData,
            });
 
            if (!response.ok) {
@@ -252,7 +256,7 @@ function initializeParksPage(){
 // If there is an image, it returns it and then removes from array.
 function getRandomImageAndRemove(pictures) {
    if (pictures.length === 0) {
-       throw new Error("No pictures available");
+       return ""
    }
    const index = Math.floor(Math.random() * pictures.length);
    return pictures.splice(index, 1)[0]; // Removes the image from the array and returns it
@@ -297,6 +301,7 @@ async function getUserImages(park_name){
 }
 
 
+// Displays park data in park-details.html
 async function displayParkData(){
    const parkId = localStorage.getItem('selectedParkId');
    
@@ -330,11 +335,11 @@ async function displayParkData(){
       </div>
    </section>
 
-   <!-- Contact -->
+   <!-- Contact and View Reviews -->
    <section class = "pt-2 pb-2">
       <div class="container">
-         <div class="row g-4">
-            <div class="col-md">
+         <div class="row g-4 align-items-start mt-3 mb-3">
+            <div class="col-md me-md-3">
                <ul class="list-group list-group-flush lead">
                   <li class="list-group-item">
                      <span class="fw-bold">Address: </span>${address}
@@ -346,6 +351,10 @@ async function displayParkData(){
                      <span class="fw-bold">Email: </span>${park.contacts.emailAddresses}
                   </li>
                </ul>
+            </div>
+            <div class="col-md-3 ms-md-4 ps-3 text-center">
+               <h4> View User Reviews <i class="fa-solid fa-star text-warning"></i><i class="fa-solid fa-star text-warning"></i><i class="fa-solid fa-star text-warning"></i></h4>
+               <button id = "viewReviewsButton" data-park-name="${park.park_name}" class = "btn btn-warning btn-lg mt-2">View Reviews</button>
             </div>
          </div>
       </div>
@@ -442,7 +451,7 @@ async function displayParkData(){
 
             <div class="col-md">
                <div id="carouselExample" class="carousel slide">
-                  <div class="carousel-inner">
+                  <div class="carousel-inner" id = "imageSliderDiv">
                     ${section}
                   </div>
 
@@ -462,14 +471,19 @@ async function displayParkData(){
    </section> 
    
    `
+   
+   
+
+   
+
    // This is for the uploading images
    // Change users on here when able.
    document.getElementById('uploadImageButton').addEventListener('click', async function() {
+      
       const fileInput = document.getElementById("imageSubmitInput");
-      const user = "Gabe";  // Example user, should be dynamically set
       const parkName = park.park_name;
   
-      const success = await uploadFile(user, parkName, fileInput);
+      const success = await uploadFile(parkName, fileInput);
       if (success) {
           // Only close the modal if the upload was successful
 
@@ -478,7 +492,19 @@ async function displayParkData(){
           const modalInstance = bootstrap.Modal.getInstance(modalElement);
           modalInstance.hide();
       }
+
+      
   });
+
+  document.getElementById("viewReviewsButton").addEventListener('click', () => {
+      let btn = document.getElementById("viewReviewsButton");
+      const parkName= btn.getAttribute('data-park-name');
+
+      localStorage.setItem('selectedParkName', parkName);
+      window.location.href = 'reviews.html';
+  })
+
+  
 
 
 }

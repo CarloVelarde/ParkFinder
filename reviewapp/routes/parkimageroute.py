@@ -1,9 +1,10 @@
 from io import BytesIO
 from fastapi.responses import JSONResponse, StreamingResponse
+from auth.authenticate import authenticate
 from models.parkimage import ParkImages
 from typing import Dict, List, Annotated
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException, Path, Query, status, File, FastAPI, UploadFile 
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, status, File, FastAPI, UploadFile 
 
 
 park_images_router = APIRouter(tags=["Park Images"])
@@ -11,7 +12,8 @@ park_images_router = APIRouter(tags=["Park Images"])
 
 
 @park_images_router.post("/upload-image/")
-async def upload_image(user: str = Query(..., description="Name of the user who uploaded the image"), park_name:str = Query(..., description="The name of the park that is in the image."), file: UploadFile = File(..., description="Image file to upload to database.")):
+async def upload_image(user: str = Depends(authenticate), park_name:str = Query(..., description="The name of the park that is in the image."), file: UploadFile = File(..., description="Image file to upload to database.")):
+# async def upload_image(user: str = Query(..., description="Name of the user who uploaded the image"), park_name:str = Query(..., description="The name of the park that is in the image."), file: UploadFile = File(..., description="Image file to upload to database.")):
 
    """
    Upload an image to the database.
