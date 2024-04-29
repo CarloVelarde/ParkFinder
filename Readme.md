@@ -8,7 +8,28 @@ Group: Hawkeye Developers
 
 ## Setup
 
-Create venv
+#### Create Virtual Enviroment
+
+`python -m venv venv`
+
+#### Activating virtual enviroment
+
+for mac
+
+`source venv/bin/activate`
+
+for windows
+
+`.\venv\Scripts\activate`
+
+When the virtual enviroment is installed and activated please install the requirements with the code below.
+
+#### Requirements code
+
+`pip install -r requirements.txt`
+
+
+
 
 Activate venv
 
