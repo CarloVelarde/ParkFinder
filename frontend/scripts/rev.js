@@ -44,6 +44,7 @@ async function editReview(review_id, content, rating){
          method: "PUT",
          headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
          },
          body: JSON.stringify(data),
       });
@@ -71,6 +72,7 @@ async function postReview(user, park_name, content, rating){
          method: "POST",
          headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
          },
          body: JSON.stringify(data),
       });
@@ -89,6 +91,9 @@ async function deleteReview(id){
    try {
       const response = await fetch(API + `reviews/delete/${id}`,{
          method:"DELETE",
+         headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+         }
       });
 
       if (!response){

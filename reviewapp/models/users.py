@@ -1,3 +1,4 @@
+from typing import Optional
 from beanie import Document
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
@@ -5,7 +6,7 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field
 class User(Document):
     email: EmailStr = ""
     password: str = ""
-    code: str = None
+    code: Optional[str] = None
 
     model_config = ConfigDict(
         json_schema_extra={
