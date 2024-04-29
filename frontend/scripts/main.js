@@ -93,21 +93,25 @@ async function fetchUserImagesById(id){
    }
 }
 
-async function uploadFile(user, parkName, fileInput) {
+async function uploadFile(parkName, fileInput) {
    if (fileInput.files.length > 0) {
        const file = fileInput.files[0];
 
        const formData = new FormData();
        formData.append('file', file);
 
+      
        const url = new URL(API + 'upload-image/');
-       url.searchParams.append('user', user);
+       
        url.searchParams.append('park_name', parkName);
 
        try {
            const response = await fetch(url, {  // Using constructed URL with query params
-               method: 'POST',
-               body: formData,
+            method: 'POST',
+            headers: {
+               'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body: formData,
            });
 
            if (!response.ok) {
@@ -477,10 +481,9 @@ async function displayParkData(){
    document.getElementById('uploadImageButton').addEventListener('click', async function() {
       
       const fileInput = document.getElementById("imageSubmitInput");
-      const user = "Gabe";  // Example user, should be dynamically set
       const parkName = park.park_name;
   
-      const success = await uploadFile(user, parkName, fileInput);
+      const success = await uploadFile(parkName, fileInput);
       if (success) {
           // Only close the modal if the upload was successful
 
