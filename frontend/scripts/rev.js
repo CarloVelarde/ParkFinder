@@ -16,6 +16,9 @@ let deleteReviewButton = document.getElementById("deleteReviewButton")
 let edit_modal = document.getElementById("editModal")
 let editReviewButton = document.getElementById("editReviewButton")
 
+
+let active_user = localStorage.getItem("userName")
+
 // Returns a park given the id
 async function fetchParkByID(id){
    try {
@@ -186,6 +189,23 @@ async function display_reviews(park){
 
    await setUpEditButtons(park)
    await setUpDeleteButtons(park)
+
+
+   // Hide delete btns if its not the users review or if hes not an admin.
+   const deleteBtns = document.querySelectorAll('.delete-button');
+   deleteBtns.forEach(btn => {
+      if (!(btn.getAttribute(`data-user`) === active_user)){
+         btn.style.display = "none"
+      }
+   })
+
+   // Hide edit btns if its not the users review or if hes not an admin.
+   const editBtns = document.querySelectorAll('.edit-button');
+   editBtns.forEach(btn => {
+      if (!(btn.getAttribute(`data-user`) === active_user)){
+         btn.style.display = "none"
+      }
+   })
 }
 
 async function setUpDeleteButtons(park){
