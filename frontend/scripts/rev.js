@@ -180,8 +180,8 @@ async function display_reviews(park){
                <p><strong><i class="fa-regular fa-comment"></i> Description: </strong>${review.content} </p>
                
             </div>
-            <button class="btn btn-outline-secondary edit-button" data-user = "${review.user}" data-review-id = "${review._id}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-            <button class="btn btn-danger delete-button" id = "deleteReviewButton" data-user = "${review.user}" data-review-id = "${review._id}">Delete</button>
+            <button class="btn btn-outline-secondary edit-button" data-user = "${review.user}" data-review-id = "${review._id}" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+            <button class="btn btn-danger delete-button" id = "deleteReviewButton" data-user = "${review.user}" data-review-id = "${review._id}"><i class="fa-regular fa-trash-can"></i> Delete</button>
             <hr>
          </div>
       `
