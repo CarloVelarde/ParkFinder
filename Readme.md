@@ -28,12 +28,14 @@ When the virtual enviroment is installed and activated please install the requir
 
 `pip install -r requirements.txt`
 
+#### Create .env file
+
+get NPS API code from this website: `[pip install -r requirements.txt](https://www.nps.gov/subjects/developer/get-started.htm)`
 
 
 
-Activate venv
 
-Load in Requirements 
+
 
 .env ADMIN_CoODe
 
