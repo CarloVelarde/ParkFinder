@@ -30,20 +30,18 @@ When the virtual enviroment is installed and activated please install the requir
 
 #### Create .env file
 
-get NPS API code from this website: `[pip install -r requirements.txt](https://www.nps.gov/subjects/developer/get-started.htm)`
+get NPS_KEY code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
 
+add ADMIN_CODE
 
+add DB_CONN
 
+### Run Program
 
-
-
-.env ADMIN_CoODe
-
-get NPS api code
-
-Just run program to get it 
+After all of these setups are done just run the program from the main.py file and the website will run
 
 ## Front-end
+
 
 ## Back-end
 
