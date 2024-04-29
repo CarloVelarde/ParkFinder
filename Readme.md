@@ -59,6 +59,19 @@ After all of these setups are done just run the program from the main.py file an
 
 <img width="1322" alt="Screen Shot 2024-04-29 at 5 57 24 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/f1b3d464-8e14-4d36-a0cd-212cc377d3c4">
 
+### Park Search Page
 
+<img width="1313" alt="Screen Shot 2024-04-29 at 5 59 17 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/2c864599-0567-4ce3-8048-fe023ada7ad0">
 
+### Park Search Example
+
+<img width="1315" alt="Screen Shot 2024-04-29 at 6 00 00 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/c6c4102b-ddf6-4126-b93f-4cf858b087c9">
+
+### Park Page Example
+
+<img width="1317" alt="Screen Shot 2024-04-29 at 6 00 51 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/eb735ecc-0377-46c6-8e2a-0e23c7c038c4">
+
+### Park Page Review Example
+
+<img width="1315" alt="Screen Shot 2024-04-29 at 6 02 20 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/cefc7ace-65fd-4bbf-af2a-f09b60dd37ba">
 
