@@ -15,6 +15,7 @@ We understand the struggle of piecing together details from various sources when
 But Park Finder isn't just a database—it's a community. We believe in the power of shared experiences, and our app reflects that. Users like you contribute reviews and stories from their park visits, offering valuable insights and tips. These firsthand accounts create a rich tapestry of what each park has to offer, beyond just the basics.
 
 ## Setup
+#### Clone the Repo
 
 #### Create Virtual Enviroment
 
@@ -22,31 +23,31 @@ But Park Finder isn't just a database—it's a community. We believe in the powe
 
 #### Activating virtual enviroment
 
-for mac
+* For __mac__
+   `source venv/bin/activate`
 
-`source venv/bin/activate`
+* For __windows__
+   `.\venv\Scripts\activate`
 
-for windows
 
-`.\venv\Scripts\activate`
-
-When the virtual enviroment is installed and activated please install the requirements with the code below.
+*When the virtual enviroment is installed and activated please install the requirements with the code below.*
 
 #### Requirements code
 
 `pip install -r requirements.txt`
 
 #### Create .env file
+Create three fiels: __NPS_KEY__, __ADMIN_CODE__, and __DB_CONN__
+* Get __NPS_KEY__ code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
+* Give __ADMIN_CODE__ a secure random numbers for managing secrets (32 bit)
+   * Using the tokens library do `token_hex(32)`
 
-get NPS_KEY code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
-
-add ADMIN_CODE
-
-add DB_CONN
 
 ### Run Program
 
-After all of these setups are done just run the program from the main.py file and the website will run
+After each step has been completed, using an IDE run the program from the main.py file or write in in a terminal `python main.py`
+
+A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
 
 ## Snapshots of Website
