@@ -41,6 +41,7 @@ Create three fiels: __NPS_KEY__, __ADMIN_CODE__, and __DB_CONN__
 * Get __NPS_KEY__ code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
 * Give __ADMIN_CODE__ a secure random numbers for managing secrets (32 bit)
    * Using the tokens library do `token_hex(32)`
+* Give __DB_CONN__ a mongodb connection string.
 
 
 ### Run Program
