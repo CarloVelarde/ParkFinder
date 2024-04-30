@@ -8,7 +8,11 @@ Group: Hawkeye Developers
 
 ## About
 
+Discover a world of outdoor adventures with Park Finder, an intuitive app designed to provide comprehensive information on parks around you. With Park Finder, you no longer need to scour multiple websites or flip through guidebooks to find your next green getaway. Our mission was simple: consolidate all park-related information into one accessible location, giving you the freedom to explore nature with confidence.
 
+We understand the struggle of piecing together details from various sources when planning a visit to a park. That's why Park Finder was born out of a need to simplify this process. By bringing together data on park amenities, trails, and attractions, our app ensures that you have all the knowledge you need at your fingertips. Now, you can focus on what really matters - enjoying the great outdoors.
+
+But Park Finder isn't just a database—it's a community. We believe in the power of shared experiences, and our app reflects that. Users like you contribute reviews and stories from their park visits, offering valuable insights and tips. These firsthand accounts create a rich tapestry of what each park has to offer, beyond just the basics.
 
 ## Setup
 
@@ -44,12 +48,6 @@ add DB_CONN
 
 After all of these setups are done just run the program from the main.py file and the website will run
 
-## Front-end
-
-
-## Back-end
-
-## Mongo DB
 
 ## Snapshots of Website
 
