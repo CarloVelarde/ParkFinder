@@ -19,7 +19,7 @@ logger.info("Starting up the Park Finder API")
 
 app = FastAPI(
     title="API for Park Finder Application",
-    summary="An API for the Park Finder Application for Spring 2023 Web Application Course CS 3980."
+    summary="An API for the Park Finder Application for Spring 2024 Web Application Course CS 3980."
 )
 
 # Initializes the connection.py file
@@ -52,8 +52,7 @@ app.include_router(park_images_router)
 app.include_router(user_router, prefix="/user")
 
 app.mount("/", StaticFiles(directory="../frontend"), name="static")
-# Ask professor if I should make it static
-# app.mount("/static", StaticFiles(directory = "../frontend"), name = "static")
+
 
 if __name__ == "__main__":
     logger.info("Starting the server")
