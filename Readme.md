@@ -50,6 +50,8 @@ After each step has been completed, using an IDE run the program from the main.p
 
 A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
+*__VERY IMPORTANT__ when you load up the link, go to the /docs endpoint and run the /parks/refresh-parks/ endpoint. Necessary to load database with parks.*
+
 
 ## Snapshots of Website
 
