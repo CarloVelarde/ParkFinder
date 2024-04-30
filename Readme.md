@@ -79,3 +79,14 @@ A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
 <img width="1315" alt="Screen Shot 2024-04-29 at 6 02 20 PM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/cefc7ace-65fd-4bbf-af2a-f09b60dd37ba">
 
+### Review Post Modal
+
+<img width="547" alt="Screen Shot 2024-04-30 at 8 31 29 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/ac967bbc-7db3-4004-943e-bd73c270bbc5">
+
+### Fast API Docs
+
+<img width="1316" alt="Screen Shot 2024-04-30 at 8 33 34 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/72d53c67-0256-4811-a306-279a6d0ec602">
+
+<img width="1309" alt="Screen Shot 2024-04-30 at 8 33 53 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/a2e81f22-78e2-4dbb-b900-73b7d557277c">
+
+<img width="1302" alt="Screen Shot 2024-04-30 at 8 34 12 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/ff089a66-9880-47f9-a005-2736e5c410c8">
