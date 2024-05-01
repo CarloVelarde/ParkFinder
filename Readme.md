@@ -38,19 +38,22 @@ But Park Finder isn't just a database—it's a community. We believe in the powe
 
 #### Create .env file
 Create three fiels: __NPS_KEY__, __ADMIN_CODE__, and __DB_CONN__
-* Get __NPS_KEY__ code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
+* Give __NPS_KEY__ an API code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
 * Give __ADMIN_CODE__ a secure random numbers for managing secrets (32 bit)
    * Using the tokens library do `token_hex(32)`
+   * Sample key you can use: "2f555d823244910d10c9cab9f53bda040d33820be75f50f62a816106bac2da43"
+   * The key is used to give admin privalages on user sign up.
 * Give __DB_CONN__ a mongodb connection string.
 
 
 ### Run Program
 
-After each step has been completed, using an IDE run the program from the main.py file or write in in a terminal `python main.py`
+After each step has been completed, using an IDE run the program from the main.py file or enter in a terminal `python main.py`
 
 A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
 *__VERY IMPORTANT__ when you load up the link, go to the /docs endpoint and run the /parks/refresh-parks/ endpoint. Necessary to load database with parks.*
+   * *Only need to do this once. The database will be saved for the next time you run it.*
 
 
 ## Snapshots of Website
