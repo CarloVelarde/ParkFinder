@@ -10,9 +10,11 @@ Group: Hawkeye Developers
 
 Discover a world of outdoor adventures with Park Finder, an intuitive app designed to provide comprehensive information on parks around you. With Park Finder, you no longer need to scour multiple websites or flip through guidebooks to find your next green getaway. Our mission was simple: consolidate all park-related information into one accessible location, giving you the freedom to explore nature with confidence.
 
-We understand the struggle of piecing together details from various sources when planning a visit to a park. That's why Park Finder was born out of a need to simplify this process. By bringing together data on park amenities, trails, and attractions, our app ensures that you have all the knowledge you need at your fingertips. Now, you can focus on what really matters - enjoying the great outdoors.
+To get started, you can search for a park by either state, park name, or both. Select the park you are interested in. After selection, you will be taken to a new page with information regarding that specific park. On the page there are two distinct feautures, one is you can view visitor uploaded photos. These are photos that other users have shared regarding the park. The other feauture is a review button. Click that button to be taken to a page of user reviews of that park. These reviews are extremely insightful as they provide a
+unique and inside view of the park. Many users will talk about what they did, what they saw, where they went, and offer general advice. Those type of reviews can help determine whether that park is right for you. 
 
-But Park Finder isn't just a database—it's a community. We believe in the power of shared experiences, and our app reflects that. Users like you contribute reviews and stories from their park visits, offering valuable insights and tips. These firsthand accounts create a rich tapestry of what each park has to offer, beyond just the basics.
+Any visitor, guest or signed user, is able to view the parks, the user uploaded images, and the user reviews. However, only signed in users can upload images and write reviews. Only the author of the review is able to edit and delete the review.
+
 
 ## Setup
 #### Clone the Repo
