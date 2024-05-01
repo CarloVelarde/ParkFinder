@@ -56,6 +56,9 @@ A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
 *__VERY IMPORTANT__ when you load up the link, go to the /docs endpoint and run the /parks/refresh-parks/ endpoint. Necessary to load database with parks.*
    * *Only need to do this once. The database will be saved for the next time you run it.*
+   * Out of the box, this endpoint is locked to admins only. There are two solutions:
+        * Create an admin account by passing in the ADMIN_CODE *(see above)* when doing the sign up feauture in the swagger docs. Once you sign up and authorize, call the endpoint.
+        * Remove the authorization from that specific endpoint. Go to the parkroutes.py file in routes and edit it.
 
 
 ## Snapshots of Website
