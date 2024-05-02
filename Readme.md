@@ -10,9 +10,11 @@ Group: Hawkeye Developers
 
 Discover a world of outdoor adventures with Park Finder, an intuitive app designed to provide comprehensive information on parks around you. With Park Finder, you no longer need to scour multiple websites or flip through guidebooks to find your next green getaway. Our mission was simple: consolidate all park-related information into one accessible location, giving you the freedom to explore nature with confidence.
 
-We understand the struggle of piecing together details from various sources when planning a visit to a park. That's why Park Finder was born out of a need to simplify this process. By bringing together data on park amenities, trails, and attractions, our app ensures that you have all the knowledge you need at your fingertips. Now, you can focus on what really matters - enjoying the great outdoors.
+To get started, you can search for a park by either state, park name, or both. Select the park you are interested in. After selection, you will be taken to a new page with information regarding that specific park. On the page there are two distinct feautures, one is you can view visitor uploaded photos. These are photos that other users have shared regarding the park. The other feauture is a review button. Click that button to be taken to a page of user reviews of that park. These reviews are extremely insightful as they provide a
+unique and inside view of the park. Many users will talk about what they did, what they saw, where they went, and offer general advice. Those type of reviews can help determine whether that park is right for you. 
 
-But Park Finder isn't just a database—it's a community. We believe in the power of shared experiences, and our app reflects that. Users like you contribute reviews and stories from their park visits, offering valuable insights and tips. These firsthand accounts create a rich tapestry of what each park has to offer, beyond just the basics.
+Any visitor, guest or signed user, is able to view the parks, the user uploaded images, and the user reviews. However, only signed in users can upload images and write reviews. Only the author of the review is able to edit and delete the review.
+
 
 ## Setup
 #### Clone the Repo
@@ -38,19 +40,25 @@ But Park Finder isn't just a database—it's a community. We believe in the powe
 
 #### Create .env file
 Create three fiels: __NPS_KEY__, __ADMIN_CODE__, and __DB_CONN__
-* Get __NPS_KEY__ code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
+* Give __NPS_KEY__ an API code from this website: `https://www.nps.gov/subjects/developer/get-started.htm`
 * Give __ADMIN_CODE__ a secure random numbers for managing secrets (32 bit)
    * Using the tokens library do `token_hex(32)`
+   * Sample key you can use: "2f555d823244910d10c9cab9f53bda040d33820be75f50f62a816106bac2da43"
+   * The key is used to give admin privalages on user sign up.
 * Give __DB_CONN__ a mongodb connection string.
 
 
 ### Run Program
 
-After each step has been completed, using an IDE run the program from the main.py file or write in in a terminal `python main.py`
+After each step has been completed, using an IDE run the program from the main.py file or enter in a terminal `python main.py`
 
 A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 
 *__VERY IMPORTANT__ when you load up the link, go to the /docs endpoint and run the /parks/refresh-parks/ endpoint. Necessary to load database with parks.*
+   * *Only need to do this once. The database will be saved for the next time you run it.*
+   * Out of the box, this endpoint is locked to admins only. There are two solutions:
+        * Create an admin account by passing in the ADMIN_CODE *(see above)* when doing the sign up feauture in the swagger docs. Once you sign up and authorize, call the endpoint.
+        * Remove the authorization from that specific endpoint. Go to the parkroutes.py file in routes and edit it.
 
 
 ## Snapshots of Website
