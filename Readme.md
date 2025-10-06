@@ -1,9 +1,5 @@
 # Park Finder
 
-By: Kevin O'Connell, Carlo Velarde, and Gabe Solis
-
-Group: Hawkeye Developers
-
 ## About
 
 Discover a world of outdoor adventures with Park Finder, an intuitive app designed to provide comprehensive information on parks around you. With Park Finder, you no longer need to scour multiple websites or flip through guidebooks to find your next green getaway. Our mission was simple: consolidate all park-related information into one accessible location, giving you the freedom to explore nature with confidence.
@@ -98,3 +94,4 @@ A link will be displayed in the terminal and click it `http://127.0.0.1:8000`
 <img width="1309" alt="Screen Shot 2024-04-30 at 8 33 53 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/a2e81f22-78e2-4dbb-b900-73b7d557277c">
 
 <img width="1302" alt="Screen Shot 2024-04-30 at 8 34 12 AM" src="https://github.com/CarloVelarde/ParkFinder/assets/45603150/ff089a66-9880-47f9-a005-2736e5c410c8">
+
